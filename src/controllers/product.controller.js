@@ -2,9 +2,12 @@ import {
   checkIsObjectIdOrHexString,
   createProductModel,
   findProducts,
+  handleDeleteProduct,
+  handleGetoneProduct,
   handleUpdateProduct,
 } from "../models/product.model.js";
 
+import { handleGetoneCategory } from "../models/category.model.js";
 import { httpStatus } from "../configs/http-status.config.js";
 import { messageResponse } from "../utils/message.util.js";
 
@@ -105,3 +108,71 @@ export const updateProduct = async (req, res) => {
 	}
 };
 
+// get one 
+export const getoneProduct = async (req, res) => {
+	try {
+		const id = req.params.productId;
+
+		if (!isObjectIdOrHexString(id)) {
+			return res.status(httpStatus.BAD_REQUEST).json({
+				// 400
+				message: 'Id không hợp lệ',
+				success: false,
+			});
+		}
+
+		const category = await handleGetoneProduct(id);
+
+		if (!category) {
+			return res.status(httpStatus.NOT_FOUND).json({
+				// 404
+				message: 'Không tìm thấy product',
+				success: false,
+			});
+		}
+
+		return res.status(httpStatus.OK).json({
+			message: 'get product',
+			success: true,
+			data: category,
+		});
+	} catch (error) {
+		return res
+			.status(httpStatus.INTERNAL_SERVER_ERROR) // 500
+			.json({ message: 'Internal Server Error', success: false, data: error });
+		}
+	};
+	//delete
+	export const deleteProduct = async (req, res) => {
+		try {
+			const id = req.params.productId;
+	
+			if (!isObjectIdOrHexString(id)) {
+				return res.status(httpStatus.BAD_REQUEST).json({
+					// 400
+					message: 'Id không hợp lệ',
+					success: false,
+				});
+			}
+	
+			const category = await handleDeleteProduct(id);
+	
+			if (!category) {
+				return res.status(httpStatus.NOT_FOUND).json({
+					// 404
+					message: 'Không tìm thấy product',
+					success: false,
+				});
+			}
+	
+			return res.status(httpStatus.OK).json({
+				message: 'Xóa product thành công!',
+				success: true,
+				data: category,
+			});
+		} catch (error) {
+			return res
+				.status(httpStatus.INTERNAL_SERVER_ERROR) // 500
+				.json({ message: 'Internal Server Error', success: false, data: error });
+		}
+	};
