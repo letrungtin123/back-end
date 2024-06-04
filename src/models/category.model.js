@@ -1,4 +1,4 @@
-import Category from '../schemas/category.schema.js';
+import Category from '../schemas/category.shema.js';
 import { isObjectIdOrHexString } from 'mongoose';
 
 export const findCategories = async () => {

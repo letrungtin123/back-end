@@ -2,10 +2,8 @@ import {
 	checkIsObjectIdOrHexString,
 	createCategoryModel,
 	findCategories,
-	handleUpdateCategory,
 	handleGetoneCategory,
-	deleteCategory,
-	handleDeleteCategory,
+	handleUpdateCategory,
 } from '../models/category.model.js';
 
 import { httpStatus } from '../configs/http-status.config.js';
@@ -152,37 +150,37 @@ export const getoneCategory = async (req, res) => {
 		}
 	};
 	//delete
-	export const deleteCategory = async (req, res) => {
-		try {
-			const id = req.params.categoryId;
+	// export const deleteCategory = async (req, res) => {
+	// 	try {
+	// 		const id = req.params.categoryId;
 	
-			// check id category
-			if (!isObjectIdOrHexString(id)) {
-				return res.status(httpStatus.BAD_REQUEST).json({
-					// 400
-					message: 'Id không hợp lệ',
-					success: false,
-				});
-			}
+	// 		// check id category
+	// 		if (!isObjectIdOrHexString(id)) {
+	// 			return res.status(httpStatus.BAD_REQUEST).json({
+	// 				// 400
+	// 				message: 'Id không hợp lệ',
+	// 				success: false,
+	// 			});
+	// 		}
 	
-			const category = await handleDeleteCategory(id);
+	// 		const category = await handleDeleteCategory(id);
 	
-			if (!category) {
-				return res.status(httpStatus.NOT_FOUND).json({
-					// 404
-					message: 'Không tìm thấy category',
-					success: false,
-				});
-			}
+	// 		if (!category) {
+	// 			return res.status(httpStatus.NOT_FOUND).json({
+	// 				// 404
+	// 				message: 'Không tìm thấy category',
+	// 				success: false,
+	// 			});
+	// 		}
 	
-			return res.status(httpStatus.OK).json({
-				message: 'Xóa category thành công!',
-				success: true,
-				data: category,
-			});
-		} catch (error) {
-			return res
-				.status(httpStatus.INTERNAL_SERVER_ERROR) // 500
-				.json({ message: 'Internal Server Error', success: false, data: error });
-		}
-	};
+	// 		return res.status(httpStatus.OK).json({
+	// 			message: 'Xóa category thành công!',
+	// 			success: true,
+	// 			data: category,
+	// 		});
+	// 	} catch (error) {
+	// 		return res
+	// 			.status(httpStatus.INTERNAL_SERVER_ERROR) // 500
+	// 			.json({ message: 'Internal Server Error', success: false, data: error });
+	// 	}
+	// };

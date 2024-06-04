@@ -13,8 +13,8 @@ app.use(express.json());
 
 connectDb();
 
-app.use('/api/v1', cateoryRoutes);
-app.use('/api/v1',productRoutes )
+app.use('/api/v1/category', cateoryRoutes);
+app.use('/api/v1/product',productRoutes )
 const port = process.env.PORT || 3000;
 
 app.listen(port, () => {

@@ -1,12 +1,10 @@
 import {
 	createCategory,
-	deleteCategory,
 	getAllCategories,
 	getoneCategory,
 	updateCategory,
 } from '../controllers/category.controller.js';
 
-import Category from '../schemas/category.schema.js';
 import express from 'express';
 import { httpStatus } from '../configs/http-status.config.js';
 import { isObjectIdOrHexString } from 'mongoose';
@@ -23,9 +21,9 @@ router.post('/category', createCategory);
 router.put('/category/:categoryId', updateCategory);
 
 // get one category
-router.get('/category/:categoryId',getoneCategory); 
+router.get('/category/:categoryId',getoneCategory);
 
 // delete category
-router.delete('/category/:categoryId', deleteCategory);
+// router.delete('/category/:categoryId', deleteCategory);
 
 export default router;
